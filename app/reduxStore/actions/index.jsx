@@ -1,3 +1,4 @@
+import authApi from "../../apis/authApi";
 import productsApi from "../../apis/productsApi";
 
 export const getProductsAction = (limit) => async(dispatch)=>{
@@ -39,4 +40,34 @@ export const removeFromCartAction = (itemId) =>{
   return {type:'REMOVE_FROM_CART',payload:itemId}
 }
 
+export const login = (username,password) =>async(dispatch)=>{
+
+  //make api call and get token and set as payload
+const reqBody={
+  "username": username,
+  "password": password
+}
+console.log(reqBody);
+const headers = {
+  "Content-Type": "application/json"
+}
+
+  try{
+    const token=await authApi.post('/login',reqBody,{
+      method: 'POST',
+      credentials: 'include',
+      headers: headers,
+    })
+    console.log(token.data)
+    dispatch({type:'LOGIN',payload:token.data.access_token})
+  }
+  catch(err){
+    console.log(err);
+    dispatch({type:'LOGIN',payload:null})
+  }
+}
+
+export const Logout=()=>{
+  return {type:'LOGOUT',payload:null}
+}
 

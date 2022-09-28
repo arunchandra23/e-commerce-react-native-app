@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import addToCartReducer from "./addToCartReducer";
+import authReducer from "./authReducer";
 import getProductByCategoryReducer from "./getProductByCategoryReducer";
 import getProductByIdReducer from "./getProductByIdReducer";
 import getProductByNameReducer from "./getProductByNameReducer";
@@ -10,5 +11,6 @@ export default combineReducers({
     selectedProduct:getProductByIdReducer,
     categoryProducts:getProductByCategoryReducer,
     cartItems:addToCartReducer,
-    searchResults:getProductByNameReducer
+    searchResults:getProductByNameReducer,
+    token:authReducer
 })
